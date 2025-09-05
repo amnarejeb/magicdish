@@ -1,36 +1,30 @@
-<!DOCTYPE html>  
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>MagicDish - Turn Ingredients into Magical Dishes with AI</title>
+
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com/3.4.16"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          colors: {
-             primary: '#28A745', 
-          },
-          borderRadius: {
-            'button': '8px'
-          }
+          colors: { primary: '#28A745' }
         }
       }
     };
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Fonts + Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      margin: 0;
-    }
+    body { font-family: 'Poppins', sans-serif; margin: 0; }
     .hero-bg {
-      background-image: linear-gradient(rgba(228, 217, 217, 0.137), rgba(255, 255, 255, 0.493)), url(Bolitas\ y\ Rosquitas.jpeg);
+      background-image: linear-gradient(rgba(228,217,217,0.2), rgba(255,255,255,0.6)), url("Bolitas y Rosquitas.jpeg");
       background-size: cover;
       background-position: center;
       min-height: 100vh;
@@ -40,18 +34,16 @@
 <body class="bg-gray-50 min-h-screen flex flex-col">
 
   <!-- Header -->
-  <header class="bg-transparent fixed top-0 left-0 right-0 z-50 text-white">
-    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-      <div class="flex items-center">
-        <h1 class="text-3xl font-['Pacifico'] text-primary">MagicDish</h1>
-        <div class="w-8 h-8 ml-2 flex items-center justify-center">
-          <i class="ri-magic-line text-primary ri-lg"></i>
-        </div>
-      </div>
+  <header class="fixed top-0 left-0 right-0 z-50">
+    <div class="container mx-auto px-4 py-3 flex items-center">
+      <h1 class="text-3xl font-['Pacifico'] text-primary flex items-center gap-2">
+        MagicDish <i class="ri-magic-line text-primary ri-lg"></i>
+      </h1>
     </div>
   </header>
 
- <section class="hero-bg pt-24 pb-20 flex-grow flex items-center">
+  <!-- Hero Section -->
+  <section class="hero-bg pt-28 pb-20 flex-grow flex items-center">
     <div class="container mx-auto px-4 w-full">
       <div class="max-w-3xl mx-auto text-center">
         <h1 class="text-4xl md:text-5xl font-bold mb-6 text-black">
@@ -61,27 +53,20 @@
           Simply enter what you have, and let our AI create the perfect recipe for you
         </p>
 
-        <!-- FORM -->
-        <!-- FORM -->
-<form id="ingredients-form" class="relative max-w-2xl mx-auto">
-  <!-- input -->
-  <input 
-    type="text" 
-    id="ingredients-input"
-    placeholder="Enter your ingredients..." 
-    required
-    class="w-full pl-4 pr-36 py-4 rounded-full border-none shadow-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary">
+        <!-- Form -->
+        <form id="ingredients-form" class="relative max-w-2xl mx-auto">
+          <input 
+            type="text" id="ingredients-input"
+            placeholder="Enter your ingredients..." required
+            class="w-full pl-4 pr-36 py-4 rounded-full shadow-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-primary">
+          <button 
+            type="submit"
+            class="absolute right-2 top-1/2 -translate-y-1/2 bg-primary text-white px-5 py-2 rounded-full flex items-center gap-2 shadow-lg hover:bg-green-600 transition">
+            <i class="ri-magic-line text-xl"></i>
+            <span class="font-semibold text-lg">Generate</span>
+          </button>
+        </form>
 
-  <!-- زرار داخل الinput على اليمين -->
-  <button 
-    type="submit" 
-    class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-primary text-white px-5 py-2 rounded-full flex items-center justify-center gap-2 shadow-lg hover:bg-green-600 transition">
-    <i class="ri-magic-line text-xl"></i>
-    <span class="font-semibold text-lg">Generate</span>
-  </button>
-</form>
-
-        
         <div class="mt-4 text-sm text-gray-700">
           Try: "chicken, spinach, garlic" or "tofu, broccoli, soy sauce"
         </div>
@@ -94,14 +79,11 @@
     const form = document.getElementById("ingredients-form");
     const input = document.getElementById("ingredients-input");
 
-    form.addEventListener("submit", function(event) {
+    form.addEventListener("submit", (event) => {
       event.preventDefault();
       const ingredients = input.value.trim();
-
       if (ingredients) {
-        // نخزنو المكونات في localStorage
         localStorage.setItem("ingredients", ingredients);
-        // نحولو المستخدم للصفحة result.html
         window.location.href = "result.html";
       }
     });

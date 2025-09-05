@@ -5,88 +5,72 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>MagicDish - Recipe Result</title>
-  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          colors: {
-            primary: '#28A745',
-            secondary: '#FF69B4',
-          },
-          borderRadius: {
-            button: '8px'
-          },
-          boxShadow: {
-            soft: '0 10px 25px rgba(0,0,0,0.06)'
-          }
+          colors: { primary: '#28A745' }
         }
       }
     };
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
 
   <style>
     body {
       font-family: 'Poppins', sans-serif;
-      margin: 0;
     }
 
     ol.steps {
       counter-reset: step;
       list-style: none;
-      padding-left: 0;
-      margin: 0;
+      padding: 0;
     }
 
     ol.steps li {
       counter-increment: step;
       display: grid;
-      grid-template-columns: 36px 1fr;
-      align-items: start;
+      grid-template-columns: 32px 1fr;
       gap: 10px;
-      padding: 12px 14px;
+      padding: 10px;
       border: 1px solid #e5e7eb;
-      border-radius: 14px;
-      margin-bottom: 10px;
+      border-radius: 12px;
+      margin-bottom: 8px;
       background: #fafafa;
     }
 
     ol.steps li::before {
       content: counter(step);
-      display: inline-grid;
+      display: grid;
       place-items: center;
       width: 28px;
       height: 28px;
-      border-radius: 9999px;
+      border-radius: 50%;
       background: #28A745;
       color: white;
-      font-weight: 700;
-      margin-top: 2px;
+      font-weight: bold;
     }
 
     ul.ingredients {
       list-style: none;
-      padding-left: 0;
+      padding: 0;
       margin: 0;
     }
 
     ul.ingredients li {
-      position: relative;
-      padding: 10px 12px 10px 14px;
+      padding: 8px 10px;
       border-left: 3px solid #28A745;
       background: #f9fafb;
-      border-radius: 10px;
-      margin-bottom: 8px;
+      border-radius: 8px;
+      margin-bottom: 6px;
     }
 
     #recipeContent {
       opacity: 0;
-      transition: opacity 0.6s ease-in-out;
+      transition: opacity 0.5s ease-in-out;
     }
 
     #recipeContent.show {
@@ -97,34 +81,30 @@
 
 <body class="bg-gray-50 min-h-screen flex flex-col">
 
-  <!-- Loading Overlay -->
+  <!-- Loader -->
   <div id="loadingOverlay" class="fixed inset-0 bg-white bg-opacity-80 flex items-center justify-center z-50 hidden">
     <div class="flex flex-col items-center">
-      <svg class="animate-spin h-12 w-12 text-primary mb-4" xmlns="http://www.w3.org/2000/svg" fill="none"
+      <svg class="animate-spin h-10 w-10 text-primary mb-4" xmlns="http://www.w3.org/2000/svg" fill="none"
         viewBox="0 0 24 24">
         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
         <path class="opacity-75" fill="currentColor"
           d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 100 16 8 8 0 01-8-8z"></path>
       </svg>
-      <p class="text-gray-700 font-medium text-lg">Generating your magical recipe...</p>
+      <p class="text-gray-700 font-medium">Generating your magical recipe...</p>
     </div>
   </div>
 
   <!-- Header -->
   <header class="bg-transparent">
-    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-      <div class="flex items-center">
-        <h1 class="text-3xl font-['Pacifico'] text-primary">MagicDish</h1>
-        <div class="w-8 h-8 ml-2 flex items-center justify-center">
-          <i class="ri-magic-line text-primary ri-lg"></i>
-        </div>
-      </div>
+    <div class="container mx-auto px-4 py-3 flex items-center">
+      <h1 class="text-3xl font-['Pacifico'] text-primary">MagicDish</h1>
+      <i class="ri-magic-line text-primary text-xl ml-2"></i>
     </div>
   </header>
 
-  <!-- Main -->
+  <!-- Content -->
   <main class="pt-28 pb-16 px-4 flex-grow">
-    <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-soft p-8">
+    <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow p-8">
       <h2 class="text-3xl font-bold text-primary mb-6 text-center">Your Magical Recipe</h2>
 
       <div id="meta" class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6"></div>
@@ -138,7 +118,7 @@
           </ul>
         </section>
 
-        <section class="mb-2">
+        <section>
           <h4 class="text-xl font-semibold text-primary mb-3">Instructions</h4>
           <ol id="instructions" class="steps"></ol>
         </section>
@@ -173,7 +153,7 @@ Detect the language of this input: "${ingredients}".
 ALWAYS answer in the SAME language of the input.
 
 Using ONLY these ingredients (if reasonable): ${ingredients}.
-Return your answer in EXACTLY this plain text structure (no markdown):
+Return your answer in EXACTLY this plain text structure:
 
 Title: <short title>
 Servings: <number>
@@ -187,8 +167,7 @@ Ingredients:
 
 Instructions:
 1. step one
-2. step two
-`;
+2. step two`;
     }
 
     function parseRecipe(text) {
@@ -217,7 +196,7 @@ Instructions:
 
     function renderMeta({ servings, prep, cook, total }) {
       const card = (icon, label, value) => `
-        <div class="bg-gray-50 border border-gray-200 rounded-xl p-4">
+        <div class="bg-gray-50 border rounded-xl p-4">
           <div class="flex items-center gap-3">
             <i class="${icon} text-primary text-xl"></i>
             <div>
@@ -263,21 +242,14 @@ Instructions:
         });
 
         const data = await response.json();
-        console.log("API response:", data);
+        const raw = data?.candidates?.[0]?.content?.parts?.[0]?.text || "";
 
-        const raw =
-          data?.candidates?.[0]?.content?.parts?.[0]?.text ||
-          data?.candidates?.[0]?.content?.parts?.[0]?.string_value || "";
-
-        if (!raw) throw new Error("No recipe generated. Check API response.");
+        if (!raw) throw new Error("No recipe generated.");
 
         const parsed = parseRecipe(raw);
         renderRecipe(parsed);
 
       } catch (err) {
-        titleEl.textContent = "";
-        ingredientsEl.innerHTML = "";
-        instructionsEl.innerHTML = "";
         errorDiv.classList.remove("hidden");
         errorDiv.textContent = "❌ Error generating recipe: " + err.message;
       } finally {
@@ -289,8 +261,7 @@ Instructions:
     if (ingredients) {
       generateRecipe(ingredients);
     } else {
-      titleEl.textContent = "";
-      ingredientsEl.innerHTML = `<li class="text-red-500">⚠️ No ingredients found. Go back and enter ingredients.</li>`;
+      ingredientsEl.innerHTML = `<li class="text-red-500">⚠️ No ingredients found.</li>`;
     }
   </script>
 </body>
