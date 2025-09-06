@@ -81,7 +81,6 @@
 
 <body class="bg-gray-50 min-h-screen flex flex-col">
 
-  <!-- Loader -->
   <div id="loadingOverlay" class="fixed inset-0 bg-white bg-opacity-80 flex items-center justify-center z-50 hidden">
     <div class="flex flex-col items-center">
       <svg class="animate-spin h-10 w-10 text-primary mb-4" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -94,7 +93,6 @@
     </div>
   </div>
 
-  <!-- Header -->
   <header class="bg-transparent">
     <div class="container mx-auto px-4 py-3 flex items-center">
       <h1 class="text-3xl font-['Pacifico'] text-primary">MagicDish</h1>
@@ -102,7 +100,6 @@
     </div>
   </header>
 
-  <!-- Content -->
   <main class="pt-28 pb-16 px-4 flex-grow">
     <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow p-8">
       <h2 class="text-3xl font-bold text-primary mb-6 text-center">Your Magical Recipe</h2>
@@ -137,7 +134,7 @@
 
   <script>
     const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
-    const API_KEY = "AIzaSyALMWtO0mm0f0F98PLV85NPdG_fpdW5KrQ";
+    const API_KEY = "API key";
 
     const titleEl = document.getElementById("title");
     const ingredientsEl = document.getElementById("ingredients");

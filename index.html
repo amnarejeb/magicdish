@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>MagicDish - Turn Ingredients into Magical Dishes with AI</title>
 
-  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com/3.4.16"></script>
   <script>
     tailwind.config = {
@@ -17,7 +16,6 @@
     };
   </script>
 
-  <!-- Fonts + Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
 
@@ -33,7 +31,6 @@
 </head>
 <body class="bg-gray-50 min-h-screen flex flex-col">
 
-  <!-- Header -->
   <header class="fixed top-0 left-0 right-0 z-50">
     <div class="container mx-auto px-4 py-3 flex items-center">
       <h1 class="text-3xl font-['Pacifico'] text-primary flex items-center gap-2">
@@ -42,7 +39,6 @@
     </div>
   </header>
 
-  <!-- Hero Section -->
   <section class="hero-bg pt-28 pb-20 flex-grow flex items-center">
     <div class="container mx-auto px-4 w-full">
       <div class="max-w-3xl mx-auto text-center">
@@ -53,7 +49,6 @@
           Simply enter what you have, and let our AI create the perfect recipe for you
         </p>
 
-        <!-- Form -->
         <form id="ingredients-form" class="relative max-w-2xl mx-auto">
           <input 
             type="text" id="ingredients-input"
@@ -74,7 +69,6 @@
     </div>
   </section>
 
-  <!-- JS -->
   <script>
     const form = document.getElementById("ingredients-form");
     const input = document.getElementById("ingredients-input");
